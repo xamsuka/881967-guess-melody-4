@@ -1,12 +1,16 @@
-import React, {PureComponent} from 'react';
+import React, {PureComponent} from "react";
+import PropTypes from 'prop-types';
+import Artist from '../artist/artist.jsx';
 
 class QuestionArtistScreen extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {question: ``, answer: ``};
+    this.state = {question: props.question, answer: ``};
   }
 
   render() {
+    const {artists} = this.state.question;
+
     return (
       <React.Fragment>
         <section className="main" id="root">
@@ -33,7 +37,7 @@ class QuestionArtistScreen extends PureComponent {
                   style={{
                     filter: `url(#blur)`,
                     transform: `rotate(-90deg) scaleY(-1)`,
-                    transformOrigin: `center`
+                    transformOrigin: `center`,
                   }}
                 />
               </svg>
@@ -47,70 +51,28 @@ class QuestionArtistScreen extends PureComponent {
               <h2 className="game__title">Кто исполняет эту песню?</h2>
               <div className="game__track">
                 <div className="track">
-                  <button className="track__button track__button--play" type="button" />
+                  <button
+                    className="track__button track__button--play"
+                    type="button"
+                  />
                   <div className="track__status">
                     <audio />
                   </div>
                 </div>
               </div>
               <form className="game__artist">
-                <div className="artist">
-                  <input
-                    className="artist__input visually-hidden"
-                    type="radio"
-                    name="answer"
-                    defaultValue="artist-1"
-                    id="answer-1"
-                  />
-                  <label className="artist__name" htmlFor="answer-1">
-                    <img
-                      className="artist__picture"
-                      src="http://placehold.it/134x134"
-                      alt="Пелагея"
-                    />
-              Пелагея
-                  </label>
-                </div>
-                <div className="artist">
-                  <input
-                    className="artist__input visually-hidden"
-                    type="radio"
-                    name="answer"
-                    defaultValue="artist-2"
-                    id="answer-2"
-                  />
-                  <label className="artist__name" htmlFor="answer-2">
-                    <img
-                      className="artist__picture"
-                      src="http://placehold.it/134x134"
-                      alt="Пелагея"
-                    />
-              Краснознаменная дивизия имени моей бабушки
-                  </label>
-                </div>
-                <div className="artist">
-                  <input
-                    className="artist__input visually-hidden"
-                    type="radio"
-                    name="answer"
-                    defaultValue="artist-3"
-                    id="answer-3"
-                  />
-                  <label className="artist__name" htmlFor="answer-3">
-                    <img
-                      className="artist__picture"
-                      src="http://placehold.it/134x134"
-                      alt="Пелагея"
-                    />
-              Lorde
-                  </label>
-                </div>
+
               </form>
             </section>
           </section>
         </section>
-      </React.Fragment >);
+      </React.Fragment>
+    );
   }
 }
+
+QuestionArtistScreen.propTypes = {
+  question: PropTypes.any.isRequired,
+};
 
 export default QuestionArtistScreen;
