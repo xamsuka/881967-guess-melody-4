@@ -10,41 +10,47 @@ const GameScreen = {
   Genre: `genre`
 };
 
-const welcomeButtonHandler = () => {};
 
 class App extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {errorsCount: 3, screen: GameScreen.Artist, questions: props.questions};
+    this.state = {errorsCount: 3, step: -1, questions: props.questions};
+    this._welcomeButtonHandler = this._welcomeButtonHandler.bind(this);
+  }
+
+  _welcomeButtonHandler() {
+    this.setState((prevState) => ({
+      step: prevState.step + 1,
+    }));
+  }
+
+  // eslint-disable-next-line consistent-return
+  _renderGameScreen() {
+    const step = this.state.step;
+    const question = this.state.questions[step];
+
+    if (step === -1 && step < this.state.questions.length) {
+      return <WelcomeScreen errorsCount = {this.state.errorsCount} onWelcomeButtonClick = {this._welcomeButtonHandler}/>;
+    }
+
+    if (question) {
+      switch (question.type) {
+        case GameScreen.Artist:
+          return <QuestionArtistScreen question = {question} />;
+        case GameScreen.Genre:
+          return <QuestionGenreScreen />;
+      }
+    }
   }
 
   render() {
-    let screen = null;
-
-    console.log(this.state.questions)
-
-    switch (this.state.screen) {
-      case GameScreen.Welcome:
-        screen = <WelcomeScreen errorsCount = {this.state.errorsCount} onWelcomeButtonClick = {welcomeButtonHandler} />;
-        break;
-      case GameScreen.Artist:
-        screen = <QuestionArtistScreen question = {this.state.questions[0]} />;
-        break;
-      case GameScreen.Genre:
-        screen = <QuestionGenreScreen />;
-        break;
-    }
-
-    // if (this.state.screen === GameScreen.Welcome) {
-    //   screen = <WelcomeScreen errorsCount = {this.state.errorsCount} onWelcomeButtonClick = {welcomeButtonHandler}/>;
-    // }
-
-    return screen;
+    return this._renderGameScreen();
   }
 }
 
 App.propTypes = {
   errorsCount: PropTypes.number.isRequired,
+  questions: PropTypes.array.isRequired,
 };
 
 export default App;

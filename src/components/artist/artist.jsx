@@ -9,7 +9,7 @@ const Artist = ({author, imageSrc, indexAnswer}) => {
         type="radio"
         name="answer"
         defaultValue={indexAnswer}
-        id="answer-1"
+        id={indexAnswer}
       />
       <label className="artist__name" htmlFor={indexAnswer}>
         <img className="artist__picture" src={imageSrc} alt={author} />

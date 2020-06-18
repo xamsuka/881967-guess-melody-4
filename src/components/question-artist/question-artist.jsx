@@ -1,15 +1,21 @@
 import React, {PureComponent} from "react";
 import PropTypes from 'prop-types';
 import Artist from '../artist/artist.jsx';
+import Track from '../track/track.jsx';
 
 class QuestionArtistScreen extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {question: props.question, answer: ``};
   }
 
   render() {
-    const {artists} = this.state.question;
+    const {artists, audioSrc} = this.props.question;
+
+    const artistElements = artists.map((artist, index) => {
+      return <Artist author={artist.author} imageSrc={artist.imageSrc} indexAnswer = {`answer-${index}`} key={artist.author} />;
+    });
+
+    const trackElement = <Track audioSrc = {audioSrc} />;
 
     return (
       <React.Fragment>
@@ -50,18 +56,10 @@ class QuestionArtistScreen extends PureComponent {
             <section className="game__screen">
               <h2 className="game__title">Кто исполняет эту песню?</h2>
               <div className="game__track">
-                <div className="track">
-                  <button
-                    className="track__button track__button--play"
-                    type="button"
-                  />
-                  <div className="track__status">
-                    <audio />
-                  </div>
-                </div>
+                {trackElement}
               </div>
               <form className="game__artist">
-
+                {artistElements}
               </form>
             </section>
           </section>

@@ -1,19 +1,19 @@
 const questions = [
   {
     type: `artist`,
-    audioSrc: ``,
+    audioSrc: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
     artists: [
       {
         author: `Пелагея`,
-        imageSrc: `https://www.google.com/search?q=%D0%BA%D0%B0%D1%80%D1%82%D0%B8%D0%BD%D0%BA%D0%B8&tbm=isch&tbs=isz%3Ai&hl=ru&ved=0CAMQpwVqFwoTCNiKoJDfiOoCFQAAAAAdAAAAABAC&biw=1903&bih=969#imgrc=H5FJ25LHUmKX7M`,
+        imageSrc: `https://api.adorable.io/avatars/128`,
       },
       {
         author: `Моргенштерн`,
-        imageSrc: `https://www.google.com/search?q=%D0%BA%D0%B0%D1%80%D1%82%D0%B8%D0%BD%D0%BA%D0%B8&tbm=isch&tbs=isz%3Ai&hl=ru&ved=0CAMQpwVqFwoTCNiKoJDfiOoCFQAAAAAdAAAAABAC&biw=1903&bih=969#imgrc=pjl49BazVwOefM`,
+        imageSrc: `https://api.adorable.io/avatars/128`,
       },
       {
         author: `Элджей`,
-        imageSrc: `https://www.google.com/search?q=%D0%BA%D0%B0%D1%80%D1%82%D0%B8%D0%BD%D0%BA%D0%B8&tbm=isch&tbs=isz%3Ai&hl=ru&ved=0CAMQpwVqFwoTCNiKoJDfiOoCFQAAAAAdAAAAABAC&biw=1903&bih=969#imgrc=OfiT-GYgcgu_KM`,
+        imageSrc: `https://api.adorable.io/avatars/128`,
       },
     ]
   },
@@ -23,40 +23,22 @@ const questions = [
     audioSrc: [
       {
         genre: `rock`,
-        src: `...`
+        src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`
       },
       {
         genre: `rock`,
-        src: `...`
+        src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`
       },
       {
         genre: `rock`,
-        src: `...`
+        src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`
       },
       {
         genre: `rock`,
-        src: `...`
+        src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`
       }
     ]
-  },
-  {
-    type: `artist`,
-    audioSrc: ``,
-    artists: [
-      {
-        author: ``,
-        imageSrc: ``,
-      },
-      {
-        author: ``,
-        imageSrc: ``,
-      },
-      {
-        author: ``,
-        imageSrc: ``,
-      },
-    ]
-  },
+  }
 ];
 
 const Settings = {

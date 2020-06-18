@@ -3,7 +3,7 @@ import React, {PureComponent} from "react";
 class QuestionGenreScreen extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {question: ``, answer: ``};
+    this.state = {answer: [false, false, false]};
   }
   render() {
     return (
