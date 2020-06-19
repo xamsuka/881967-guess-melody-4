@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Artist /> render 1`] = `
+<div
+  className="artist"
+>
+  <input
+    className="artist__input visually-hidden"
+    defaultValue="answer-1"
+    id="answer-1"
+    name="answer"
+    type="radio"
+  />
+  <label
+    className="artist__name"
+    htmlFor="answer-1"
+  >
+    <img
+      alt="Пелагея"
+      className="artist__picture"
+      src="https://api.adorable.io/avatars/128"
+    />
+    Пелагея
+  </label>
+</div>
+`;
