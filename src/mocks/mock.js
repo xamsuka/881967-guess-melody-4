@@ -26,7 +26,11 @@ const questions = [
     audioSrc: [
       {
         genre: `rock`,
-        src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`
+        src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_541-fugue.ogg`
+      },
+      {
+        genre: `rock`,
+        src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_542-fugue.ogg`
       },
       {
         genre: `rock`,
@@ -34,11 +38,7 @@ const questions = [
       },
       {
         genre: `rock`,
-        src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`
-      },
-      {
-        genre: `rock`,
-        src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`
+        src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_544-fugue.ogg`
       }
     ]
   }

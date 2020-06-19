@@ -17,7 +17,7 @@ class QuestionArtistScreen extends PureComponent {
       return <Artist author={artist.author} imageSrc={artist.imageSrc} indexAnswer = {`answer-${index}`} key={artist.author} />;
     });
 
-    const trackElement = <Track audioSrc = {audioSrc} />;
+    const trackElement = <Track audioSrc = {audioSrc} isVariant = {false} />;
 
     return (
       <React.Fragment>

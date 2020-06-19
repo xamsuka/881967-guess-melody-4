@@ -17,6 +17,7 @@ class App extends PureComponent {
     this.state = {errorsCount: 3, step: -1, questions: props.questions};
     this.welcomeButtonHandler = this._welcomeButtonHandler.bind(this);
     this.answerButtonHandler = this._answerButtonHandler.bind(this);
+    this.answerButtonSubmitHandler = this._answerButtonSubmitHandler.bind(this);
   }
 
   _welcomeButtonHandler() {
@@ -26,6 +27,13 @@ class App extends PureComponent {
   }
 
   _answerButtonHandler() {
+    this.setState((prevState) => ({
+      step: prevState.step + 1,
+    }));
+  }
+
+  _answerButtonSubmitHandler(evt) {
+    evt.preventDefault();
     this.setState((prevState) => ({
       step: prevState.step + 1,
     }));
@@ -45,7 +53,7 @@ class App extends PureComponent {
         case GameScreen.Artist:
           return <QuestionArtistScreen question = {question} onAnswerButtonClick = {this.answerButtonHandler} />;
         case GameScreen.Genre:
-          return <QuestionGenreScreen />;
+          return <QuestionGenreScreen question = {question} onAnswerButtonSubmit = {this.answerButtonSubmitHandler} />;
       }
     }
   }
