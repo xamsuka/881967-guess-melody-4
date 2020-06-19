@@ -1,7 +1,10 @@
 const questions = [
   {
     type: `artist`,
-    audioSrc: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
+    song: {
+      audioSrc: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
+      artist: `Пелагея`
+    },
     artists: [
       {
         author: `Пелагея`,

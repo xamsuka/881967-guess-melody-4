@@ -5,7 +5,10 @@ import App from './app';
 const questions = [
   {
     type: `artist`,
-    audioSrc: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
+    song: {
+      audioSrc: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
+      artist: ``
+    },
     artists: [
       {
         author: `Пелагея`,

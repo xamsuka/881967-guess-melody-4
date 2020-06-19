@@ -88,6 +88,7 @@ exports[`<QuestionArtist /> render 1`] = `
       </div>
       <form
         className="game__artist"
+        onClick={[Function]}
       >
         <div
           className="artist"

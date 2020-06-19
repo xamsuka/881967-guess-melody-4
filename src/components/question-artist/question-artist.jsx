@@ -9,7 +9,9 @@ class QuestionArtistScreen extends PureComponent {
   }
 
   render() {
-    const {artists, audioSrc} = this.props.question;
+    const {question, onAnswerButtonClick} = this.props;
+    const {artists, song} = question;
+    const {audioSrc} = song;
 
     const artistElements = artists.map((artist, index) => {
       return <Artist author={artist.author} imageSrc={artist.imageSrc} indexAnswer = {`answer-${index}`} key={artist.author} />;
@@ -58,7 +60,7 @@ class QuestionArtistScreen extends PureComponent {
               <div className="game__track">
                 {trackElement}
               </div>
-              <form className="game__artist">
+              <form className="game__artist" onClick={onAnswerButtonClick}>
                 {artistElements}
               </form>
             </section>
@@ -70,7 +72,18 @@ class QuestionArtistScreen extends PureComponent {
 }
 
 QuestionArtistScreen.propTypes = {
-  question: PropTypes.any.isRequired,
+  question: PropTypes.shape({
+    type: PropTypes.string.isRequired,
+    song: PropTypes.shape({
+      audioSrc: PropTypes.string.isRequired,
+      artist: PropTypes.string.isRequired
+    }).isRequired,
+    artists: PropTypes.arrayOf(PropTypes.shape({
+      author: PropTypes.string.isRequired,
+      imageSrc: PropTypes.string.isRequired,
+    })).isRequired
+  }),
+  onAnswerButtonClick: PropTypes.func.isRequired,
 };
 
 export default QuestionArtistScreen;

@@ -15,10 +15,17 @@ class App extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {errorsCount: 3, step: -1, questions: props.questions};
-    this._welcomeButtonHandler = this._welcomeButtonHandler.bind(this);
+    this.welcomeButtonHandler = this._welcomeButtonHandler.bind(this);
+    this.answerButtonHandler = this._answerButtonHandler.bind(this);
   }
 
   _welcomeButtonHandler() {
+    this.setState((prevState) => ({
+      step: prevState.step + 1,
+    }));
+  }
+
+  _answerButtonHandler() {
     this.setState((prevState) => ({
       step: prevState.step + 1,
     }));
@@ -30,13 +37,13 @@ class App extends PureComponent {
     const question = this.state.questions[step];
 
     if (step === -1 && step < this.state.questions.length) {
-      return <WelcomeScreen errorsCount = {this.state.errorsCount} onWelcomeButtonClick = {this._welcomeButtonHandler}/>;
+      return <WelcomeScreen errorsCount = {this.state.errorsCount} onWelcomeButtonClick = {this.welcomeButtonHandler} />;
     }
 
     if (question) {
       switch (question.type) {
         case GameScreen.Artist:
-          return <QuestionArtistScreen question = {question} />;
+          return <QuestionArtistScreen question = {question} onAnswerButtonClick = {this.answerButtonHandler} />;
         case GameScreen.Genre:
           return <QuestionGenreScreen />;
       }

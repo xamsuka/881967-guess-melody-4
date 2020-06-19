@@ -4,7 +4,10 @@ import QuestionArtistScreen from './question-artist';
 
 const question = {
   type: `artist`,
-  audioSrc: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
+  song: {
+    audioSrc: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
+    artist: ``
+  },
   artists: [
     {
       author: `Пелагея`,
@@ -23,7 +26,7 @@ const question = {
 
 test(`<QuestionArtist /> render`, () => {
   const three = renderer
-    .create(<QuestionArtistScreen question = {question} />).toJSON();
+    .create(<QuestionArtistScreen question = {question} onAnswerButtonClick = {() => {}}/>).toJSON();
 
   expect(three).toMatchSnapshot();
 });
