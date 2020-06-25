@@ -2,6 +2,7 @@ import React, {PureComponent} from "react";
 import PropTypes from 'prop-types';
 import Artist from '../artist/artist.jsx';
 import Track from '../track/track.jsx';
+import {TRACK_VARIANT} from '../../const.js';
 
 class QuestionArtistScreen extends PureComponent {
   constructor(props) {
@@ -17,7 +18,7 @@ class QuestionArtistScreen extends PureComponent {
       return <Artist author={artist.author} imageSrc={artist.imageSrc} indexAnswer = {`answer-${index}`} key={artist.author} />;
     });
 
-    const trackElement = <Track audioSrc = {audioSrc} isVariant = {false} />;
+    const trackElement = <Track audioSrc = {audioSrc} questionType = {TRACK_VARIANT.ARTIST} />;
 
     return (
       <React.Fragment>

@@ -1,6 +1,7 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import Track from "../track/track.jsx";
+import {TRACK_VARIANT} from '../../const.js';
 
 class QuestionGenreScreen extends PureComponent {
   constructor(props) {
@@ -11,8 +12,8 @@ class QuestionGenreScreen extends PureComponent {
     const {question, onAnswerButtonSubmit} = this.props;
     const {audioSrc} = question;
 
-    const trackElements = audioSrc.map((audio) => {
-      return <Track audioSrc={audio} isVariant={true} key={audio.src} />;
+    const trackElements = audioSrc.map((audio, index) => {
+      return <Track audioSrc={audio.src} questionType = {TRACK_VARIANT.GENRE} indexTrack = {index} key={audio.src} />;
     });
 
     return (

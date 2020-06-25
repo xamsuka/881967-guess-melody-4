@@ -21,8 +21,8 @@ class App extends PureComponent {
   }
 
   _welcomeButtonHandler() {
-    this.setState((prevState) => ({
-      step: prevState.step + 1,
+    this.setState(() => ({
+      step: 0,
     }));
   }
 
@@ -44,7 +44,7 @@ class App extends PureComponent {
     const step = this.state.step;
     const question = this.state.questions[step];
 
-    if (step === -1 && step < this.state.questions.length) {
+    if (step === -1 || step >= this.state.questions.length) {
       return <WelcomeScreen errorsCount = {this.state.errorsCount} onWelcomeButtonClick = {this.welcomeButtonHandler} />;
     }
 

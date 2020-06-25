@@ -1,22 +1,23 @@
 import React, {PureComponent} from "react";
 import PropTypes from 'prop-types';
+import {TRACK_VARIANT} from '../../const.js';
 
 class Track extends PureComponent {
   constructor(props) {
     super(props);
   }
 
-  _getVariantElement() {
+  _getVariantElement(indexTrack) {
     return (
       <div className="game__answer">
         <input
           className="game__input visually-hidden"
           type="checkbox"
           name="answer"
-          defaultValue="answer-1"
-          id="answer-3"
+          value={`answer-${indexTrack}`}
+          id={`answer-${indexTrack}`}
         />
-        <label className="game__check" htmlFor="answer-3">
+        <label className="game__check" htmlFor={`answer-${indexTrack}`}>
           Отметить
         </label>
       </div>
@@ -24,8 +25,8 @@ class Track extends PureComponent {
   }
 
   render() {
-    const {audioSrc, isVariant = false} = this.props;
-    const variantElement = isVariant ? this._getVariantElement() : ``;
+    const {audioSrc, questionType = TRACK_VARIANT.ARTIST, indexTrack} = this.props;
+    const variantElement = questionType === TRACK_VARIANT.GENRE ? this._getVariantElement(indexTrack) : ``;
 
     return (
       <div className="track">
@@ -41,7 +42,8 @@ class Track extends PureComponent {
 
 Track.propTypes = {
   audioSrc: PropTypes.any.isRequired,
-  isVariant: PropTypes.bool.isRequired
+  questionType: PropTypes.string.isRequired,
+  indexTrack: PropTypes.number,
 };
 
 export default Track;
