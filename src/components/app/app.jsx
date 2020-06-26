@@ -1,4 +1,5 @@
 import React, {PureComponent} from 'react';
+import {BrowserRouter, Route, Switch} from "react-router-dom";
 import PropTypes from 'prop-types';
 import WelcomeScreen from '../welcome-screen/welcome-screen.jsx';
 import QuestionArtistScreen from '../question-artist/question-artist.jsx';
@@ -39,8 +40,7 @@ class App extends PureComponent {
     }));
   }
 
-  // eslint-disable-next-line consistent-return
-  _renderGameScreen() {
+  render() {
     const step = this.state.step;
     const question = this.state.questions[step];
 
@@ -56,10 +56,24 @@ class App extends PureComponent {
           return <QuestionGenreScreen question = {question} onAnswerButtonSubmit = {this.answerButtonSubmitHandler} />;
       }
     }
-  }
 
-  render() {
-    return this._renderGameScreen();
+    return (
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/">
+            {this._renderGameScreen()};
+          </Route>
+          <Route exact path="/dev-artist">
+            <QuestionArtistScreen question = {question} onAnswerButtonClick = {this.answerButtonHandler} />
+          </Route>
+          <Route exact path="/dev-genre">
+            <QuestionGenreScreen question = {question} onAnswerButtonSubmit = {this.answerButtonSubmitHandler} />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    );
+
+
   }
 }
 

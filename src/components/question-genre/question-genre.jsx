@@ -6,14 +6,19 @@ import {TRACK_VARIANT} from '../../const.js';
 class QuestionGenreScreen extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {answer: [false, false, false]};
+    this.state = {answer: [false, false, false], activePlayer: 0};
   }
+
   render() {
     const {question, onAnswerButtonSubmit} = this.props;
     const {audioSrc} = question;
 
     const trackElements = audioSrc.map((audio, index) => {
-      return <Track audioSrc={audio.src} questionType = {TRACK_VARIANT.GENRE} indexTrack = {index} key={audio.src} />;
+      return <Track audioSrc = {audio.src} questionType = {TRACK_VARIANT.GENRE} indexTrack = {index} key = {audio.src} onPlayButtonClick = {() => {
+        this.setState({
+          activePlayer: index,
+        });
+      }} />;
     });
 
     return (
