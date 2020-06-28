@@ -1,16 +1,11 @@
 import React, {PureComponent} from 'react';
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import PropTypes from 'prop-types';
+import GameScreen from '../game-screen/game-screen.jsx';
 import WelcomeScreen from '../welcome-screen/welcome-screen.jsx';
 import QuestionArtistScreen from '../question-artist/question-artist.jsx';
 import QuestionGenreScreen from '../question-genre/question-genre.jsx';
-
-const GameScreen = {
-  Welcome: `welcome`,
-  Artist: `artist`,
-  Genre: `genre`
-};
-
+import {GameType} from '../../const';
 
 class App extends PureComponent {
   constructor(props) {
@@ -50,10 +45,15 @@ class App extends PureComponent {
 
     if (question) {
       switch (question.type) {
-        case GameScreen.Artist:
-          return <QuestionArtistScreen question = {question} onAnswerButtonClick = {this.answerButtonHandler} />;
-        case GameScreen.Genre:
-          return <QuestionGenreScreen question = {question} onAnswerButtonSubmit = {this.answerButtonSubmitHandler} />;
+        case GameType.ARTIST:
+          return <GameScreen type = {GameType.ARTIST}>
+            <QuestionArtistScreen question = {question} onAnswerButtonClick = {this.answerButtonHandler} />
+          </GameScreen>;
+
+        case GameType.GENRE:
+          return <GameScreen type = {GameType.GENRE}>
+            <QuestionGenreScreen question = {question} onAnswerButtonSubmit = {this.answerButtonSubmitHandler} />
+          </GameScreen>;
       }
     }
 

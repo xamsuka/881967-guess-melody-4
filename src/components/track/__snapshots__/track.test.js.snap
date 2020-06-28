@@ -6,6 +6,7 @@ exports[`<Track /> render 1`] = `
 >
   <button
     className="track__button track__button--play"
+    onClick={[Function]}
     type="button"
   />
   <div

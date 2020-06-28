@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from 'prop-types';
-import {TRACK_VARIANT, TRACK_CLASS} from '../../const.js';
+import {GameType, TRACK_CLASS} from '../../const.js';
 
 class Track extends PureComponent {
   constructor(props) {
@@ -29,25 +29,24 @@ class Track extends PureComponent {
 
   componentDidUpdate() {
     if (this.state.isPlaying) {
-      this.audioRef.current.pause();
-    } else {
       this.audioRef.current.play();
+    } else {
+      this.audioRef.current.pause();
     }
   }
 
   render() {
-    const {audioSrc, questionType = TRACK_VARIANT.ARTIST, indexTrack, onPlayButtonClick} = this.props;
-    const variantElement = questionType === TRACK_VARIANT.GENRE ? this._getVariantElement(indexTrack) : ``;
+    const {audioSrc, questionType = GameType.ARTIST, indexTrack, onPlayButtonClick} = this.props;
+    const variantElement = questionType === GameType.GENRE ? this._getVariantElement(indexTrack) : ``;
     const trackClass = this.state.isPlaying ? TRACK_CLASS.PAUSE : TRACK_CLASS.PLAY;
 
     return (
       <div className="track">
         <button className={`track__button ${trackClass}`} type="button" onClick = {() => {
-          onPlayButtonClick();
           this.setState(() => ({
             isPlaying: !this.state.isPlaying
           }));
-
+          onPlayButtonClick();
         }} />
 
         <div className="track__status">
@@ -63,6 +62,7 @@ Track.propTypes = {
   audioSrc: PropTypes.any.isRequired,
   questionType: PropTypes.string.isRequired,
   indexTrack: PropTypes.number,
+  onPlayButtonClick: PropTypes.func,
 };
 
 export default Track;

@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import Track from "../track/track.jsx";
-import {TRACK_VARIANT} from '../../const.js';
+import {GameType} from '../../const.js';
 
 class QuestionGenreScreen extends PureComponent {
   constructor(props) {
@@ -14,58 +14,22 @@ class QuestionGenreScreen extends PureComponent {
     const {audioSrc} = question;
 
     const trackElements = audioSrc.map((audio, index) => {
-      return <Track audioSrc = {audio.src} questionType = {TRACK_VARIANT.GENRE} indexTrack = {index} key = {audio.src} onPlayButtonClick = {() => {
+      return <Track audioSrc = {audio.src} questionType = {GameType.GENRE} indexTrack = {index} key = {audio.src} onPlayButtonClick = {() => {
         this.setState({
-          activePlayer: index,
+          activePlayer: this.state.activePlayer + 1,
         });
       }} />;
     });
 
     return (
-      <React.Fragment>
-        <section className="game game--genre">
-          <header className="game__header">
-            <a className="game__back" href="#">
-              <span className="visually-hidden">Сыграть ещё раз</span>
-              <img
-                className="game__logo"
-                src="img/melody-logo-ginger.png"
-                alt="Угадай мелодию"
-              />
-            </a>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="timer"
-              viewBox="0 0 780 780"
-            >
-              <circle
-                className="timer__line"
-                cx={390}
-                cy={390}
-                r={370}
-                style={{
-                  filter: `url(#blur)`,
-                  transform: `rotate(-90deg) scaleY(-1)`,
-                  transformOrigin: `center`,
-                }}
-              />
-            </svg>
-            <div className="game__mistakes">
-              <div className="wrong" />
-              <div className="wrong" />
-              <div className="wrong" />
-            </div>
-          </header>
-          <section className="game__screen">
-            <h2 className="game__title">Выберите инди-рок треки</h2>
-            <form className="game__tracks" onSubmit={onAnswerButtonSubmit}>
-              {trackElements}
+      <section className="game__screen">
+        <h2 className="game__title">Выберите инди-рок треки</h2>
+        <form className="game__tracks" onSubmit={onAnswerButtonSubmit}>
+          {trackElements}
 
-              <button className="game__submit button" type="submit">Ответить</button>
-            </form>
-          </section>
-        </section>
-      </React.Fragment>
+          <button className="game__submit button" type="submit">Ответить</button>
+        </form>
+      </section>
     );
   }
 }
