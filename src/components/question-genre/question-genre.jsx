@@ -6,7 +6,7 @@ import {GameType} from '../../const.js';
 class QuestionGenreScreen extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {answer: [false, false, false], activePlayer: 0};
+    this.state = {answer: [false, false, false, false], activePlayer: -1};
   }
 
   render() {
@@ -14,9 +14,9 @@ class QuestionGenreScreen extends PureComponent {
     const {audioSrc} = question;
 
     const trackElements = audioSrc.map((audio, index) => {
-      return <Track audioSrc = {audio.src} questionType = {GameType.GENRE} indexTrack = {index} key = {audio.src} onPlayButtonClick = {() => {
+      return <Track audioSrc = {audio.src} isPlaying = {this.state.activePlayer === index ? true : false} questionType = {GameType.GENRE} indexTrack = {index} key = {audio.src} onPlayButtonClick = {(index) => {
         this.setState({
-          activePlayer: this.state.activePlayer + 1,
+          activePlayer: this.state.activePlayer === index ? -1 : index,
         });
       }} />;
     });
@@ -26,7 +26,6 @@ class QuestionGenreScreen extends PureComponent {
         <h2 className="game__title">Выберите инди-рок треки</h2>
         <form className="game__tracks" onSubmit={onAnswerButtonSubmit}>
           {trackElements}
-
           <button className="game__submit button" type="submit">Ответить</button>
         </form>
       </section>

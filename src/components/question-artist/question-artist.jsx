@@ -7,6 +7,7 @@ import {GameType} from '../../const.js';
 class QuestionArtistScreen extends PureComponent {
   constructor(props) {
     super(props);
+    this.state = {isPlaying: false};
   }
 
   render() {
@@ -18,7 +19,11 @@ class QuestionArtistScreen extends PureComponent {
       return <Artist author={artist.author} imageSrc={artist.imageSrc} indexAnswer = {`answer-${index}`} key={artist.author} />;
     });
 
-    const trackElement = <Track audioSrc = {audioSrc} questionType = {GameType.ARTIST} />;
+    const trackElement = <Track isPlaying = {this.state.isPlaying} audioSrc = {audioSrc} questionType = {GameType.ARTIST} onPlayButtonClick = {() => {
+      this.setState({
+        isPlaying: !this.state.isPlaying,
+      });
+    }} />;
 
     return (
       <section className="game__screen">

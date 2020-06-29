@@ -36,9 +36,9 @@ class Track extends PureComponent {
   }
 
   render() {
-    const {audioSrc, questionType = GameType.ARTIST, indexTrack, onPlayButtonClick} = this.props;
+    const {audioSrc, isPlaying, questionType = GameType.ARTIST, indexTrack, onPlayButtonClick} = this.props;
     const variantElement = questionType === GameType.GENRE ? this._getVariantElement(indexTrack) : ``;
-    const trackClass = this.state.isPlaying ? TRACK_CLASS.PAUSE : TRACK_CLASS.PLAY;
+    const trackClass = isPlaying ? TRACK_CLASS.PAUSE : TRACK_CLASS.PLAY;
 
     return (
       <div className="track">
