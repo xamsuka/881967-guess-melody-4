@@ -14,7 +14,7 @@ class QuestionGenreScreen extends PureComponent {
     const {audioSrc} = question;
 
     const trackElements = audioSrc.map((audio, index) => {
-      return <Track audioSrc = {audio.src} isPlaying = {this.state.activePlayer === index ? true : false} questionType = {GameType.GENRE} indexTrack = {index} key = {audio.src} onPlayButtonClick = {(index) => {
+      return <Track audioSrc = {audio.src} isPlaying = {this.state.activePlayer === index ? true : false} questionType = {GameType.GENRE} indexTrack = {index} key = {audio.src} onPlayButtonClick = {() => {
         this.setState({
           activePlayer: this.state.activePlayer === index ? -1 : index,
         });

@@ -5,9 +5,8 @@ import {GameType, TRACK_CLASS} from '../../const.js';
 class Track extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {isPlaying: false};
+    this.state = {isPlaying: props.isPlaying};
     this.audioRef = React.createRef();
-
   }
 
   _getVariantElement(indexTrack) {
@@ -28,11 +27,15 @@ class Track extends PureComponent {
   }
 
   componentDidUpdate() {
-    if (this.state.isPlaying) {
+    if (this.props.isPlaying) {
       this.audioRef.current.play();
     } else {
       this.audioRef.current.pause();
     }
+  }
+
+  componentWillUnmount() {
+
   }
 
   render() {
@@ -62,7 +65,7 @@ Track.propTypes = {
   audioSrc: PropTypes.any.isRequired,
   questionType: PropTypes.string.isRequired,
   indexTrack: PropTypes.number,
-  onPlayButtonClick: PropTypes.func,
+  onPlayButtonClick: PropTypes.func.isRequired,
 };
 
 export default Track;
