@@ -34,10 +34,6 @@ class Track extends PureComponent {
     }
   }
 
-  componentWillUnmount() {
-
-  }
-
   render() {
     const {audioSrc, isPlaying, questionType = GameType.ARTIST, indexTrack, onPlayButtonClick} = this.props;
     const variantElement = questionType === GameType.GENRE ? this._getVariantElement(indexTrack) : ``;
