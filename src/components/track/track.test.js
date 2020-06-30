@@ -7,7 +7,7 @@ const questionType = `artist`;
 
 test(`<Track /> render`, () => {
   const three = renderer
-    .create(<Track audioSrc = {track} questionType = {questionType} indexTrack = {0} onPlayButtonClick = {() => {}} />).toJSON();
+    .create(<Track audioSrc = {track} isPlaying = {false} questionType = {questionType} indexTrack = {0} onPlayButtonClick = {() => {}} />).toJSON();
 
   expect(three).toMatchSnapshot();
 });

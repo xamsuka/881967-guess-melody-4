@@ -65,6 +65,7 @@ Track.propTypes = {
   audioSrc: PropTypes.any.isRequired,
   questionType: PropTypes.string.isRequired,
   indexTrack: PropTypes.number,
+  isPlaying: PropTypes.bool.isRequired,
   onPlayButtonClick: PropTypes.func.isRequired,
 };
 
