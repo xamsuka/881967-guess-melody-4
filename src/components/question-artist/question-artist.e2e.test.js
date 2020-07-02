@@ -33,7 +33,11 @@ test(`Clicking the answer button for a question`, () => {
   const onAnswerButtonClick = jest.fn();
 
   const questionArtistScreen = shallow(
-      <QuestionArtistScreen question = {question} onAnswerButtonClick = {onAnswerButtonClick}/>
+      <QuestionArtistScreen
+        renderTrack = {() => {}}
+        question = {question}
+        onAnswerButtonClick = {onAnswerButtonClick}
+      />
   );
 
   const answerForm = questionArtistScreen.find(`.game__artist`);

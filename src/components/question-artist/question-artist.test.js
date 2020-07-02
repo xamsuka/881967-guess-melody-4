@@ -26,7 +26,7 @@ const question = {
 
 test(`<QuestionArtist /> render`, () => {
   const three = renderer
-    .create(<QuestionArtistScreen question = {question} onAnswerButtonClick = {() => {}}/>).toJSON();
+    .create(<QuestionArtistScreen renderTrack = {() => {}} question = {question} onAnswerButtonClick = {() => {}} />).toJSON();
 
   expect(three).toMatchSnapshot();
 });

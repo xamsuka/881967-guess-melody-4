@@ -5,12 +5,22 @@ import GameScreen from '../game-screen/game-screen.jsx';
 import WelcomeScreen from '../welcome-screen/welcome-screen.jsx';
 import QuestionArtistScreen from '../question-artist/question-artist.jsx';
 import QuestionGenreScreen from '../question-genre/question-genre.jsx';
+import widthTrack from '../../hocs/with-track';
 import {GameType} from '../../const';
+
+const QuestionArtistScreenWrapped = widthTrack(QuestionArtistScreen);
+const QuestionGenreScreenWrapped = widthTrack(QuestionGenreScreen);
 
 class App extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {errorsCount: 3, step: -1, questions: props.questions};
+
+    this.state = {
+      errorsCount: 3,
+      step: -1,
+      questions: props.questions
+    };
+
     this.welcomeButtonHandler = this._welcomeButtonHandler.bind(this);
     this.answerButtonHandler = this._answerButtonHandler.bind(this);
     this.answerButtonSubmitHandler = this._answerButtonSubmitHandler.bind(this);
@@ -47,12 +57,12 @@ class App extends PureComponent {
       switch (question.type) {
         case GameType.ARTIST:
           return <GameScreen type = {GameType.ARTIST}>
-            <QuestionArtistScreen question = {question} onAnswerButtonClick = {this.answerButtonHandler} />
+            <QuestionArtistScreenWrapped question = {question} onAnswerButtonClick = {this.answerButtonHandler} />
           </GameScreen>;
 
         case GameType.GENRE:
           return <GameScreen type = {GameType.GENRE}>
-            <QuestionGenreScreen question = {question} onAnswerButtonSubmit = {this.answerButtonSubmitHandler} />
+            <QuestionGenreScreenWrapped question = {question} onAnswerButtonSubmit = {this.answerButtonSubmitHandler} />
           </GameScreen>;
       }
     }
@@ -61,13 +71,13 @@ class App extends PureComponent {
       <BrowserRouter>
         <Switch>
           <Route exact path="/">
-            {this._renderGameScreen()};
+            <WelcomeScreen errorsCount = {this.state.errorsCount} onWelcomeButtonClick = {this.welcomeButtonHandler} />;
           </Route>
           <Route exact path="/dev-artist">
-            <QuestionArtistScreen question = {question} onAnswerButtonClick = {this.answerButtonHandler} />
+            <QuestionArtistScreenWrapped question = {question} onAnswerButtonClick = {this.answerButtonHandler} />
           </Route>
           <Route exact path="/dev-genre">
-            <QuestionGenreScreen question = {question} onAnswerButtonSubmit = {this.answerButtonSubmitHandler} />
+            <QuestionGenreScreenWrapped question = {question} onAnswerButtonSubmit = {this.answerButtonSubmitHandler} />
           </Route>
         </Switch>
       </BrowserRouter>

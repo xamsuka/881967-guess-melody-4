@@ -1,43 +1,33 @@
-import React, {PureComponent} from "react";
+import React from "react";
 import PropTypes from 'prop-types';
 import Artist from '../artist/artist.jsx';
-import Track from '../track/track.jsx';
-import {GameType} from '../../const.js';
 
-class QuestionArtistScreen extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {isPlaying: false};
-  }
+const QuestionArtistScreen = (props) => {
+  const {question, onAnswerButtonClick, renderTrack} = props;
+  const {artists, song} = question;
+  const {audioSrc} = song;
 
-  render() {
-    const {question, onAnswerButtonClick} = this.props;
-    const {artists, song} = question;
-    const {audioSrc} = song;
+  const artistElements = artists.map((artist, index) => {
+    return <Artist
+      author={artist.author}
+      imageSrc={artist.imageSrc}
+      indexAnswer = {`answer-${index}`}
+      key={artist.author}
+    />;
+  });
 
-    const artistElements = artists.map((artist, index) => {
-      return <Artist author={artist.author} imageSrc={artist.imageSrc} indexAnswer = {`answer-${index}`} key={artist.author} />;
-    });
-
-    const trackElement = <Track isPlaying = {this.state.isPlaying} audioSrc = {audioSrc} questionType = {GameType.ARTIST} onPlayButtonClick = {() => {
-      this.setState({
-        isPlaying: !this.state.isPlaying,
-      });
-    }} />;
-
-    return (
-      <section className="game__screen">
-        <h2 className="game__title">Кто исполняет эту песню?</h2>
-        <div className="game__track">
-          {trackElement}
-        </div>
-        <form className="game__artist" onClick={onAnswerButtonClick}>
-          {artistElements}
-        </form>
-      </section>
-    );
-  }
-}
+  return (
+    <section className="game__screen">
+      <h2 className="game__title">Кто исполняет эту песню?</h2>
+      <div className="game__track">
+        {renderTrack(audioSrc, 0)}
+      </div>
+      <form className="game__artist" onClick={onAnswerButtonClick}>
+        {artistElements}
+      </form>
+    </section>
+  );
+};
 
 QuestionArtistScreen.propTypes = {
   question: PropTypes.shape({
@@ -52,6 +42,7 @@ QuestionArtistScreen.propTypes = {
     })).isRequired
   }),
   onAnswerButtonClick: PropTypes.func.isRequired,
+  renderTrack: PropTypes.func.isRequired,
 };
 
 export default QuestionArtistScreen;

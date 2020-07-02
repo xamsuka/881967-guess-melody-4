@@ -27,7 +27,7 @@ const question = {
 
 test(`<QuestionGenreScreen /> render`, () => {
   const three = renderer
-    .create(<QuestionGenreScreen question = {question} onAnswerButtonSubmit ={() => {}} />).toJSON();
+    .create(<QuestionGenreScreen renderTrack = {() => {}} question = {question} onAnswerButtonSubmit ={() => {}} />).toJSON();
 
   expect(three).toMatchSnapshot();
 });
