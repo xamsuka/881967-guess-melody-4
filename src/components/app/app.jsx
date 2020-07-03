@@ -1,28 +1,34 @@
 import React, {PureComponent} from 'react';
+import {BrowserRouter, Route, Switch} from "react-router-dom";
 import PropTypes from 'prop-types';
+import GameScreen from '../game-screen/game-screen.jsx';
 import WelcomeScreen from '../welcome-screen/welcome-screen.jsx';
 import QuestionArtistScreen from '../question-artist/question-artist.jsx';
 import QuestionGenreScreen from '../question-genre/question-genre.jsx';
+import widthTrack from '../../hocs/with-track';
+import {GameType} from '../../const';
 
-const GameScreen = {
-  Welcome: `welcome`,
-  Artist: `artist`,
-  Genre: `genre`
-};
-
+const QuestionArtistScreenWrapped = widthTrack(QuestionArtistScreen);
+const QuestionGenreScreenWrapped = widthTrack(QuestionGenreScreen);
 
 class App extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {errorsCount: 3, step: -1, questions: props.questions};
+
+    this.state = {
+      errorsCount: 3,
+      step: -1,
+      questions: props.questions
+    };
+
     this.welcomeButtonHandler = this._welcomeButtonHandler.bind(this);
     this.answerButtonHandler = this._answerButtonHandler.bind(this);
     this.answerButtonSubmitHandler = this._answerButtonSubmitHandler.bind(this);
   }
 
   _welcomeButtonHandler() {
-    this.setState((prevState) => ({
-      step: prevState.step + 1,
+    this.setState(() => ({
+      step: 0,
     }));
   }
 
@@ -39,27 +45,43 @@ class App extends PureComponent {
     }));
   }
 
-  // eslint-disable-next-line consistent-return
-  _renderGameScreen() {
+  render() {
     const step = this.state.step;
     const question = this.state.questions[step];
 
-    if (step === -1 && step < this.state.questions.length) {
+    if (step === -1 || step >= this.state.questions.length) {
       return <WelcomeScreen errorsCount = {this.state.errorsCount} onWelcomeButtonClick = {this.welcomeButtonHandler} />;
     }
 
     if (question) {
       switch (question.type) {
-        case GameScreen.Artist:
-          return <QuestionArtistScreen question = {question} onAnswerButtonClick = {this.answerButtonHandler} />;
-        case GameScreen.Genre:
-          return <QuestionGenreScreen question = {question} onAnswerButtonSubmit = {this.answerButtonSubmitHandler} />;
+        case GameType.ARTIST:
+          return <GameScreen type = {GameType.ARTIST}>
+            <QuestionArtistScreenWrapped question = {question} onAnswerButtonClick = {this.answerButtonHandler} />
+          </GameScreen>;
+
+        case GameType.GENRE:
+          return <GameScreen type = {GameType.GENRE}>
+            <QuestionGenreScreenWrapped question = {question} onAnswerButtonSubmit = {this.answerButtonSubmitHandler} />
+          </GameScreen>;
       }
     }
-  }
 
-  render() {
-    return this._renderGameScreen();
+    return (
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/">
+            <WelcomeScreen errorsCount = {this.state.errorsCount} onWelcomeButtonClick = {this.welcomeButtonHandler} />;
+          </Route>
+          <Route exact path="/dev-artist">
+            <QuestionArtistScreenWrapped question = {question} onAnswerButtonClick = {this.answerButtonHandler} />
+          </Route>
+          <Route exact path="/dev-genre">
+            <QuestionGenreScreenWrapped question = {question} onAnswerButtonSubmit = {this.answerButtonSubmitHandler} />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    );
   }
 }
 

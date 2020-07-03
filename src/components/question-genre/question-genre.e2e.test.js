@@ -34,7 +34,11 @@ test(`Clicking the answer button for a question`, () => {
   const onAnswerButtonSubmit = jest.fn();
 
   const questionGenreScreen = shallow(
-      <QuestionGenreScreen question = {question} onAnswerButtonSubmit = {onAnswerButtonSubmit} />
+      <QuestionGenreScreen
+        renderTrack = {() => {}}
+        question = {question}
+        onAnswerButtonSubmit = {onAnswerButtonSubmit}
+      />
   );
 
   const answerForm = questionGenreScreen.find(`.game__tracks`);

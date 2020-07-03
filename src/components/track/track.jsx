@@ -1,47 +1,56 @@
 import React, {PureComponent} from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
+import {TRACK_CLASS} from "../../const.js";
 
 class Track extends PureComponent {
   constructor(props) {
     super(props);
+
+    this.state = {
+      isPlaying: props.isPlaying,
+    };
+
+    this.audioRef = React.createRef();
   }
 
-  _getVariantElement() {
-    return (
-      <div className="game__answer">
-        <input
-          className="game__input visually-hidden"
-          type="checkbox"
-          name="answer"
-          defaultValue="answer-1"
-          id="answer-3"
-        />
-        <label className="game__check" htmlFor="answer-3">
-          Отметить
-        </label>
-      </div>
-    );
+  componentDidUpdate() {
+    if (this.props.isPlaying) {
+      this.audioRef.current.play();
+    } else {
+      this.audioRef.current.pause();
+    }
   }
 
   render() {
-    const {audioSrc, isVariant = false} = this.props;
-    const variantElement = isVariant ? this._getVariantElement() : ``;
+    const {audioSrc, isPlaying, indexTrack, onPlayButtonClick} = this.props;
+    const trackClass = isPlaying ? TRACK_CLASS.PAUSE : TRACK_CLASS.PLAY;
 
     return (
-      <div className="track">
-        <button className="track__button track__button--play" type="button" />
+      <React.Fragment>
+        <button
+          className={`track__button ${trackClass}`}
+          type="button"
+          onClick={() => {
+            this.setState(() => ({
+              isPlaying: !this.state.isPlaying,
+            }));
+            onPlayButtonClick(indexTrack);
+          }}
+        />
+
         <div className="track__status">
-          <audio src={audioSrc} />
+          <audio ref={this.audioRef} src={audioSrc} />
         </div>
-        {variantElement}
-      </div>
+      </React.Fragment>
     );
   }
 }
 
 Track.propTypes = {
   audioSrc: PropTypes.any.isRequired,
-  isVariant: PropTypes.bool.isRequired
+  indexTrack: PropTypes.number,
+  isPlaying: PropTypes.bool.isRequired,
+  onPlayButtonClick: PropTypes.func.isRequired,
 };
 
 export default Track;
