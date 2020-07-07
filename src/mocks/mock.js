@@ -44,8 +44,4 @@ const questions = [
   }
 ];
 
-const Settings = {
-  ERROR_COUNT: 3,
-};
-
-export {questions, Settings};
+export {questions};
