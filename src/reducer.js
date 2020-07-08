@@ -43,7 +43,7 @@ const ActionCreator = {
 
     return {
       type: ActionTypes.INC_MISTAKES,
-      payload: isAnswerCorrect ? 1 : 0,
+      payload: isAnswerCorrect ? 0 : 1,
     };
   },
 };

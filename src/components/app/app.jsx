@@ -59,6 +59,9 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
+  step: PropTypes.number.isRequired,
+  onWelcomeButtonClick: PropTypes.func.isRequired,
+  onAnswerButtonClick: PropTypes.func.isRequired,
   errorsCount: PropTypes.number.isRequired,
   questions: PropTypes.array.isRequired,
 };
@@ -72,7 +75,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.incrementStep());
   },
 
-  onAnswerButtonClick() {
+  onAnswerButtonClick(question, answer) {
     dispatch(ActionCreator.incrementStep());
     dispatch(ActionCreator.incrementMistakes(question, answer));
   },

@@ -22,7 +22,7 @@ const QuestionArtistScreen = (props) => {
       <div className="game__track">
         {renderTrack(audioSrc, 0)}
       </div>
-      <form className="game__artist" onClick={onAnswerButtonClick}>
+      <form className="game__artist" onClick={onAnswerButtonClick()}>
         {artistElements}
       </form>
     </section>
