@@ -1,5 +1,6 @@
 import {extend} from './utils';
 import {GameType} from './const';
+import {questions} from './mocks/mock.js';
 
 const isArtistAnswerCorrect = (question, userAnswer) => {
   return userAnswer.artist === question.song.artist;
@@ -14,7 +15,7 @@ const isGenreAnswerCorrect = (question, userAnswer) => {
 const initialState = {
   mistakes: 0,
   step: -1,
-  questions: [],
+  questions,
   maxMistakes: 3,
 };
 

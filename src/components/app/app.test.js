@@ -1,6 +1,10 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import {Provider} from "react-redux";
+import configureStore from "redux-mock-store";
 import App from './app';
+
+const mockStore = configureStore([]);
 
 const questions = [
   {
@@ -27,9 +31,24 @@ const questions = [
 ];
 
 test(`Render App`, () => {
+  const store = mockStore({
+    mistakes: 0,
+  });
+
   const three = renderer
     .create(
-        <App errorsCount = {3} questions = {questions} />
+        <Provider store={store}>
+          <App
+            maxMistakes = {3}
+            questions = {questions}
+            onWelcomeButtonClick = {() => {}}
+            onUserAnswer = {() => {}}
+            step = {-1}
+          />
+        </Provider>, {
+          createNodeMock: () => {
+            return {};
+          }}
     ).toJSON();
 
   expect(three).toMatchSnapshot();

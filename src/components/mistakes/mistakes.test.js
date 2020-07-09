@@ -4,7 +4,7 @@ import Mistakes from './mistakes.jsx';
 
 test(`Mistakes component render`, () => {
   const three = renderer
-    .create(<Mistakes countMistakes = {3} />).toJSON();
+    .create(<Mistakes count = {3} />).toJSON();
 
-  expect(three).toMatchSnapshot(1);
+  expect(three).toMatchSnapshot();
 });

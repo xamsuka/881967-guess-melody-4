@@ -8,7 +8,7 @@ import QuestionArtistScreen from '../question-artist/question-artist.jsx';
 import QuestionGenreScreen from '../question-genre/question-genre.jsx';
 import widthTrack from '../../hocs/with-track';
 import {ActionCreator} from '../../reducer.js';
-import {GameType} from '../../const';
+import {GameType} from '../../const.js';
 
 const QuestionArtistScreenWrapped = widthTrack(QuestionArtistScreen);
 const QuestionGenreScreenWrapped = widthTrack(QuestionGenreScreen);
@@ -20,7 +20,7 @@ class App extends PureComponent {
 
   render() {
     const {errorsCount, questions, step, onWelcomeButtonClick, onAnswerButtonClick} = this.props;
-    const question = questions[step];
+    const question = questions[step] || ``;
 
     if (step === -1 || step >= questions.length) {
       return <WelcomeScreen errorsCount = {errorsCount} onWelcomeButtonClick = {onWelcomeButtonClick} />;
@@ -68,6 +68,8 @@ App.propTypes = {
 
 const mapStateToProps = (state) => ({
   step: state.step,
+  questions: state.questions,
+  errorsCount: state.maxMistakes,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -75,9 +77,9 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.incrementStep());
   },
 
-  onAnswerButtonClick(question, answer) {
+  onAnswerButtonClick(questions, answer) {
     dispatch(ActionCreator.incrementStep());
-    dispatch(ActionCreator.incrementMistakes(question, answer));
+    dispatch(ActionCreator.incrementMistakes(questions, answer));
   },
 });
 
