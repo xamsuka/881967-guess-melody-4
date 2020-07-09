@@ -3,12 +3,12 @@ import {GameType} from './const';
 import {questions} from './mocks/mock.js';
 
 const isArtistAnswerCorrect = (question, userAnswer) => {
-  return userAnswer.artist === question.song.artist;
+  return userAnswer === question.song.artist;
 };
 
 const isGenreAnswerCorrect = (question, userAnswer) => {
   return userAnswer.every((it, i) => {
-    return it === (question.answers[i].genre === question.genre);
+    return it === (question.audioSrc[i].genre === question.genre);
   });
 };
 
@@ -32,7 +32,7 @@ const ActionCreator = {
 
   incrementMistakes: (question, answer) => {
     let isAnswerCorrect = false;
-
+    debugger;
     switch (question.type) {
       case GameType.ARTIST:
         isAnswerCorrect = isArtistAnswerCorrect(question, answer);
