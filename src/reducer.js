@@ -32,7 +32,7 @@ const ActionCreator = {
 
   incrementMistakes: (question, answer) => {
     let isAnswerCorrect = false;
-    debugger;
+
     switch (question.type) {
       case GameType.ARTIST:
         isAnswerCorrect = isArtistAnswerCorrect(question, answer);
@@ -52,12 +52,25 @@ const ActionCreator = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionTypes.INC_STEP:
+      const nextState = state.step + action.payload;
+
+      if (nextState >= state.questions.length) {
+        return extend({}, initialState);
+      }
+
       return extend(state, {
-        step: state.step + action.payload,
+        step: nextState,
       });
+
     case ActionTypes.INC_MISTAKES:
+      const mistakes = state.mistakes + action.payload;
+
+      if (mistakes >= state.maxMistakes) {
+        return extend({}, initialState);
+      }
+
       return extend(state, {
-        mistakes: state.mistakes + action.payload,
+        mistakes,
       });
   }
 
