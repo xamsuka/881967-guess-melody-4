@@ -30,6 +30,10 @@ const question = {
   ]
 };
 
+const mockEvent = {
+  preventDefault() {},
+};
+
 test(`Clicking the answer button for a question`, () => {
   const onAnswerButtonSubmit = jest.fn();
 
@@ -43,7 +47,7 @@ test(`Clicking the answer button for a question`, () => {
 
   const answerForm = questionGenreScreen.find(`.game__tracks`);
 
-  answerForm.props().onSubmit();
+  answerForm.simulate(`submit`, mockEvent);
 
   expect(onAnswerButtonSubmit.mock.calls.length).toBe(1);
 });

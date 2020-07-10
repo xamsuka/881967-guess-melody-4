@@ -29,6 +29,15 @@ const question = {
   ]
 };
 
+const mockEvent = {
+  preventDefault() {},
+  target: {
+    parentElement: {
+      textContent: `Линда`,
+    }
+  }
+};
+
 test(`Clicking the answer button for a question`, () => {
   const onAnswerButtonClick = jest.fn();
 
@@ -42,7 +51,7 @@ test(`Clicking the answer button for a question`, () => {
 
   const answerForm = questionArtistScreen.find(`.game__artist`);
 
-  answerForm.props().onClick();
+  answerForm.simulate(`click`, mockEvent);
 
   expect(onAnswerButtonClick.mock.calls.length).toBe(1);
 });
