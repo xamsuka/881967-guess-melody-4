@@ -13,11 +13,15 @@ class QuestionGenreScreen extends PureComponent {
   render() {
     const {question, onAnswerButtonSubmit, renderTrack} = this.props;
     const {audioSrc} = question;
+    const {answer} = this.state;
 
     return (
       <section className="game__screen">
         <h2 className="game__title">Выберите инди-рок треки</h2>
-        <form className="game__tracks" onSubmit={onAnswerButtonSubmit}>
+        <form className="game__tracks" onSubmit={(evt) => {
+          evt.preventDefault();
+          onAnswerButtonSubmit(question, answer);
+        }}>
           {audioSrc.map((audio, index) => {
             return <div className="track" key={audio.src}>
               {renderTrack(audio.src, index)}
@@ -28,6 +32,12 @@ class QuestionGenreScreen extends PureComponent {
                   name="answer"
                   value={`answer-${index}`}
                   id={`answer-${index}`}
+                  onChange = {(evt) => {
+                    const isChecked = evt.target.checked;
+                    this.setState(this.state, () => {
+                      answer[index] = isChecked;
+                    });
+                  }}
                 />
                 <label className="game__check" htmlFor={`answer-${index}`}>
                   Отметить

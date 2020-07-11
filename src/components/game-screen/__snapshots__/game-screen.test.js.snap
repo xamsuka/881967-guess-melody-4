@@ -43,17 +43,7 @@ exports[`<Game Screen /> render <GameScreen> <QuestionArtistScreen /> </GameScre
     </svg>
     <div
       className="game__mistakes"
-    >
-      <div
-        className="wrong"
-      />
-      <div
-        className="wrong"
-      />
-      <div
-        className="wrong"
-      />
-    </div>
+    />
   </header>
    
   <div
@@ -106,17 +96,7 @@ exports[`<Game Screen /> render <GameScreen> <QuestionGenreScreen /> </GameScree
     </svg>
     <div
       className="game__mistakes"
-    >
-      <div
-        className="wrong"
-      />
-      <div
-        className="wrong"
-      />
-      <div
-        className="wrong"
-      />
-    </div>
+    />
   </header>
    
   <div

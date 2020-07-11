@@ -1,10 +1,4 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import {Provider} from "react-redux";
-import configureStore from "redux-mock-store";
-import App from './app';
-
-const mockStore = configureStore([]);
+import {reducer, ActionCreator} from './reducer.js';
 
 const questions = [
   {
@@ -94,26 +88,60 @@ const questions = [
   },
 ];
 
-test(`Render App`, () => {
-  const store = mockStore({
+test(`Редьюсер должен вернуть исходное состояние без передачи дополнительных параметров`, () => {
+  expect(reducer(void 0, {})).toEqual({
+    step: -1,
+    mistakes: 0,
+    maxMistakes: 3,
+    questions,
+  });
+});
+
+test(`Тестирование фунции reducer`, () => {
+  expect(reducer({
+    step: -1,
+    mistakes: 0,
+    maxMistakes: 3,
+    questions,
+  }, {
+    type: `INC_STEP`,
+    payload: 0,
+  })).toEqual({
     step: -1,
     mistakes: 0,
     maxMistakes: 3,
     questions,
   });
 
-  const three = renderer
-    .create(
-        <Provider store={store}>
-          <App
-            onWelcomeButtonClick = {() => {}}
-            onUserAnswer = {() => {}}
-          />
-        </Provider>, {
-          createNodeMock: () => {
-            return {};
-          }}
-    ).toJSON();
+  expect(reducer({
+    step: -1,
+    mistakes: 0,
+    maxMistakes: 3,
+    questions,
+  }, {
+    type: `INC_STEP`,
+    payload: 1,
+  })).toEqual({
+    step: 0,
+    mistakes: 0,
+    maxMistakes: 3,
+    questions,
+  });
+});
 
-  expect(three).toMatchSnapshot();
+test(`Тестирование функции ActionCreator на возращаемые экшены`, () => {
+  expect(ActionCreator.incrementStep()).toEqual({
+    type: `INC_STEP`,
+    payload: 1,
+  });
+
+  expect(ActionCreator.incrementMistakes({type: `artist`, song: {artist: `Test`}}, `Test`)).toEqual({
+    type: `INC_MISTAKES`,
+    payload: 0,
+  });
+
+  expect(ActionCreator.incrementMistakes({type: `artist`, song: {artist: `Test`}}, `Test2`)).toEqual({
+    type: `INC_MISTAKES`,
+    payload: 1,
+  });
 });
